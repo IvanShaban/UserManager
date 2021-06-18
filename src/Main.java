@@ -6,6 +6,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws UserNotFoundException, IOException {
         System.out.println("Hello there! It's UserManager");
-        UserService.getMethod();
+        UserService userService = new UserService();
+        userService.startProgram();
     }
 }

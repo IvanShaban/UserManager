@@ -10,7 +10,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class UserService {
-    public static void getMethod() throws IOException, UserNotFoundException {
+    private UserRepository userRepository = new UserRepository();
+    private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    public void startProgram() throws IOException, UserNotFoundException {
         System.out.println("Выберите дальнейшие действия:");
         System.out.println("1. Сохранить нового пользователя.");
         System.out.println("2. Найти пользователя по id или о имени и вывести на экран.");
@@ -18,7 +20,6 @@ public class UserService {
         System.out.println("4. Обновить пользователя по id.");
         System.out.println("5. Завершить программу.");
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int actionNumber = Integer.parseInt(reader.readLine());
 
         switch (actionNumber) {
@@ -36,53 +37,70 @@ public class UserService {
                 break;
             case 5:
                 System.out.println("До новых встреч.");
+                System.exit(0);
+                break;
+            default:
+                System.out.println("Все хуйня Миша, давай по новой!");
+                startProgram();
         }
-
-        if (actionNumber != 5) {
-            getMethod();
-        }
+        startProgram();
     }
 
-    public static void createUser() throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
+    public void createUser() throws IOException {
         System.out.println("Сохранение нового пользователя.");
         System.out.println("Введите имя.");
         String name = reader.readLine();
-
+        if (name.equals("")) {
+            System.out.println("Все хуйня Миша, давай по новой!");
+            createUser();
+        }
         System.out.println("Выберите пол :");
         System.out.println("1 - мужской, 2 - женский.");
-        String sex;
+        String sex = "MALE";
         int value = Integer.parseInt(reader.readLine());
-        if (value == 1)
+        if (value == 1) {
             sex = "MALE";
-        else
+        }
+        else if (value == 2) {
             sex = "FEMALE";
+        }
+        else {
+            System.out.println("Все хуйня Миша, давай по новой!");
+            createUser();
+        }
 
         System.out.println("Введите любимое порно.");
         String favoritePorn = reader.readLine();
-
-        UserRepository.addOnRepository(name, Sex.valueOf(sex), favoritePorn);
+        if (favoritePorn.equals("")) {
+            System.out.println("Все хуйня Миша, давай по новой!");
+            createUser();
+        }
+        User user = userRepository.insertRepository(name, Sex.valueOf(sex), favoritePorn);
+        System.out.println(user);
+        System.out.println();
     }
 
-    public static void findUser() throws IOException, UserNotFoundException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
+    public void findUser() throws IOException, UserNotFoundException {
         System.out.println("Поиск пользователя по id или по имени и вывод на экран.");
         System.out.println("Выберите вид поиска:");
         System.out.println("1 - поиск по id, 2 - поиск по имени.");
+
         int value = Integer.parseInt(reader.readLine());
         if (value == 1){
             System.out.println("Поиск по id.");
             System.out.println("Введите id.");
             int id = Integer.parseInt(reader.readLine());
-            UserRepository.findById(id);
+            User user = userRepository.findById(id);
+            System.out.println(user);
+            System.out.println();
         }
         else if (value == 2){
             System.out.println("Поиск по имени.");
             System.out.println("Введите имя.");
             String name = reader.readLine();
-            UserRepository.findByName(name);
+            User user = userRepository.findByName(name);
+            System.out.println(user);
+            System.out.println();
         }
         else {
             System.out.println("Введены неправильные данные. Попробуйте снова.");
@@ -90,18 +108,16 @@ public class UserService {
         }
     }
 
-    public static void deleteUser() throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
+    public void deleteUser() throws IOException {
         System.out.println("Удаление пользователя.");
         System.out.println("Введите id.");
         int id = Integer.parseInt(reader.readLine());
-        UserRepository.deleteById(id);
+        userRepository.deleteById(id);
+        System.out.println("Пользователь удален.");
+        System.out.println();
     }
 
-    public static void updateUser() throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
+    public void updateUser() throws IOException {
         System.out.println("Обновление пользователя.");
         System.out.println("Введите id.");
         int id = Integer.parseInt(reader.readLine());
@@ -111,16 +127,23 @@ public class UserService {
 
         System.out.println("Выберите пол :");
         System.out.println("1 - мужской, 2 - женский.");
-        String sex;
+        String sex = "MALE";
         int value = Integer.parseInt(reader.readLine());
-        if (value == 1)
+        if (value == 1) {
             sex = "MALE";
-        else
+        }
+        else if (value == 2) {
             sex = "FEMALE";
-
+        }
+        else {
+            System.out.println("Все хуйня Миша, давай по новой!");
+            createUser();
+        }
         System.out.println("Введите любимое порно.");
         String favoritePorn = reader.readLine();
-        UserRepository.updateById(id, name, Sex.valueOf(sex), favoritePorn);
-    }
 
+        System.out.println("Пользователь обновлен.");
+        System.out.println(userRepository.updateById(id, name, Sex.valueOf(sex), favoritePorn));
+        System.out.println();
+    }
 }

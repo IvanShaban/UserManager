@@ -1,26 +1,20 @@
 package entity;
 
 public class User {
-    private static int count = 1;
     private int id;
     private String name;
     private Sex sex;
     private String favoritePorn;
 
-    public User(String name, Sex sex, String favoritePorn) {
-        this.id = count;
+    public User(int id, String name, Sex sex, String favoritePorn) {
+        this.id = id;
         this.name = name;
         this.sex = sex;
         this.favoritePorn = favoritePorn;
-        count++;
     }
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -37,10 +31,6 @@ public class User {
 
     public void setSex(Sex sex) {
         this.sex = sex;
-    }
-
-    public String getFavoritePorn() {
-        return favoritePorn;
     }
 
     public void setFavoritePorn(String favoritePorn) {
