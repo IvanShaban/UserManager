@@ -1,3 +1,5 @@
+package main.java;
+
 import repository.UserNotFoundException;
 import service.UserService;
 
