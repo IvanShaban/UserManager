@@ -10,7 +10,7 @@ public class UserRepository {
     private Map<Integer, User> userRepository = new HashMap<>();
 
     public User insertRepository(String name, Sex sex, String favoritePorn) {
-        User user = new User(userRepository.size(), name, sex, favoritePorn);
+        User user = new User(name, sex, favoritePorn);
         userRepository.put(user.getId(), user);
         return user;
     }

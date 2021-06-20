@@ -1,16 +1,18 @@
 package entity;
 
 public class User {
+    private int count;
     private int id;
     private String name;
     private Sex sex;
     private String favoritePorn;
 
-    public User(int id, String name, Sex sex, String favoritePorn) {
-        this.id = id;
+    public User(String name, Sex sex, String favoritePorn) {
+        this.id = count;
         this.name = name;
         this.sex = sex;
         this.favoritePorn = favoritePorn;
+        count++;
     }
 
     public int getId() {
