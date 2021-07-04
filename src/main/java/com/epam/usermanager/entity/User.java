@@ -1,7 +1,7 @@
-package entity;
+package com.epam.usermanager.entity;
 
 public class User {
-    private int count;
+    private static int count;
     private int id;
     private String name;
     private Sex sex;
@@ -25,10 +25,6 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Sex getSex() {
-        return sex;
     }
 
     public void setSex(Sex sex) {
