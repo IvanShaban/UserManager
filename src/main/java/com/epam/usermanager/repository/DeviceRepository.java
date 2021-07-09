@@ -4,7 +4,6 @@ import com.epam.usermanager.entity.Device;
 import com.epam.usermanager.entity.Type;
 import com.epam.usermanager.entity.User;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +22,7 @@ public class DeviceRepository {
         return device;
     }
 
-    public Device findByNameOfDevice(String nameOfDevice) { //TODO byId, byType (все девайсы. у которых нет владельцев или у отдельного владельца)
+    public Device findByNameOfDevice(String nameOfDevice) {
         for (Map.Entry<Integer, Device> pair : deviceRepository.entrySet()) {
             if (pair.getValue().getNameOfDevice().equals(nameOfDevice)) {
                 return deviceRepository.get(pair.getKey());
@@ -54,22 +53,28 @@ public class DeviceRepository {
     }
 
     public List<Device> getUserDevices(User owner) {
-        List<Device> listOfDevices = new ArrayList<>();
-        for (Map.Entry<Integer, Device> pair : deviceRepository.entrySet()) {
-            if (pair.getValue().getOwner().equals(owner)) {
-                listOfDevices.add(pair.getValue());
-            }
-        }
-        return listOfDevices;
+        return deviceRepository.values().stream()
+                .filter(device -> owner.equals(device.getOwner()))
+                .collect(Collectors.toList());
+//        List<Device> listOfDevices = new ArrayList<>();
+//        for (Map.Entry<Integer, Device> pair : deviceRepository.entrySet()) {
+//            if (pair.getValue().getOwner().equals(owner)) {
+//                listOfDevices.add(pair.getValue());
+//            }
+//        }
+//        return listOfDevices;
     }
 
     public List<Device> getUserDevices() {
-        List<Device> listOfDevices = new ArrayList<>();
-        for (Map.Entry<Integer, Device> pair : deviceRepository.entrySet()) {
-            if (pair.getValue().getOwner() == null) {
-                listOfDevices.add(pair.getValue());
-            }
-        }
-        return listOfDevices;
+        return deviceRepository.values().stream()
+                .filter(device -> null == device.getOwner())
+                .collect(Collectors.toList());
+//        List<Device> listOfDevices = new ArrayList<>();
+//        for (Map.Entry<Integer, Device> pair : deviceRepository.entrySet()) {
+//            if (pair.getValue().getOwner() == null) {
+//                listOfDevices.add(pair.getValue());
+//            }
+//        }
+//        return listOfDevices;
     }
 }

@@ -64,13 +64,9 @@ public class UserRepository {
 
     public User updateById(int id, String name, Sex sex, String favoritePorn) {
         User user = userRepository.get(id);
-        System.out.println(1);
         user.setName(name);
-        System.out.println(2);
         user.setSex(sex);
-        System.out.println(3);
         user.setFavoritePorn(favoritePorn);
-        System.out.println(4);
         return user;
     }
 
@@ -88,14 +84,25 @@ public class UserRepository {
             //statement.executeUpdate("create TABLE IF NOT EXISTS Books(id MEDIUMINT NOT NULL AUTO_INCREMENT, " +
             //        "name CHAR(30) NOT NULL, PRIMARY KEY(id))");
             ResultSet resultSet = statement.executeQuery("select * from users");
-
-            while (resultSet.next()) {
-                System.out.println(resultSet.getInt(1));
-                System.out.println(resultSet.getString(2));
-                System.out.println(resultSet.getInt(3));
-                System.out.println(resultSet.getString(4));
-                System.out.println("________________________");
-            }
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS users (\n" +
+                    "    id int PRIMARY KEY NOT NULL AUTO_INCREMENT,\n" +
+                    "    name VARCHAR(30) NOT NULL,\n" +
+                    "    sex VARCHAR(6) NOT NULL,\n" +
+                    "    favoritePorn VARCHAR(30) NOT NULL\n" +
+                    ")");
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS devices (\n" +
+                    "    id int PRIMARY KEY NOT NULL AUTO_INCREMENT,\n" +
+                    "    name VARCHAR(30) NOT NULL,\n" +
+                    "    type VARCHAR(7) NOT NULL,\n" +
+                    "    FOREIGN KEY (userId)  REFERENCES users (id)\n" +
+                    ")");
+//            while (resultSet.next()) {
+//                System.out.println(resultSet.getInt(1));
+//                System.out.println(resultSet.getString(2));
+//                System.out.println(resultSet.getInt(3));
+//                System.out.println(resultSet.getString(4));
+//                System.out.println("________________________");
+//            }
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();

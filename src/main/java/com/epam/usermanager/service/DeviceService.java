@@ -8,7 +8,6 @@ import com.epam.usermanager.repository.DeviceRepository;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DeviceService {
@@ -162,7 +161,7 @@ public class DeviceService {
     }
 
     public void findDevices(User owner) throws IOException {
-        List<Device> listOfDevices = new ArrayList<>();
+        List<Device> listOfDevices;
         if (owner == null) {
             listOfDevices = deviceRepository.getUserDevices();
         } else {

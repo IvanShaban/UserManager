@@ -2,7 +2,7 @@
 <project version="4">
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="true" />
+    <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
   </component>
   <component name="DBNavigator.Project.DataExportManager">
@@ -24,7 +24,11 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes />
+    <loaded-nodes>
+      <connection connection-id="bd624907-0699-49e4-ae23-275528864682">
+        <schema name="usermanager" object-types="table" />
+      </connection>
+    </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="bd624907-0699-49e4-ae23-275528864682">
@@ -42,6 +46,10 @@
   </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />
+  </component>
+  <component name="DBNavigator.Project.FileConnectionMappingManager">
+    <mapping file-url="file://$PROJECT_DIR$/src/main/resources/dbconnection/connection" connection-id="bd624907-0699-49e4-ae23-275528864682" session-id="MAIN" current-schema="" />
+    <mapping file-url="file://$PROJECT_DIR$/src/main/resources/asdf" connection-id="bd624907-0699-49e4-ae23-275528864682" session-id="MAIN" current-schema="usermanager" />
   </component>
   <component name="DBNavigator.Project.MethodExecutionManager">
     <method-browser />
@@ -69,17 +77,17 @@
           <description value="" />
           <database-type value="MYSQL" />
           <config-type value="BASIC" />
-          <database-version value="9999.0" />
-          <driver-source value="BUILTIN" />
-          <driver-library value="" />
-          <driver value="" />
+          <database-version value="8.0" />
+          <driver-source value="EXTERNAL" />
+          <driver-library value="C:\Program Files (x86)\MySQL\Connector J 8.0\mysql-connector-java-8.0.25.jar" />
+          <driver value="com.mysql.cj.jdbc.Driver" />
           <url-type value="DATABASE" />
           <host value="localhost" />
           <port value="3306" />
-          <database value="mysql" />
+          <database value="usermanager" />
           <type value="USER_PASSWORD" />
           <user value="root" />
-          <deprecated-pwd value="MTIzNA==" />
+          <deprecated-pwd value="cm9vdA==" />
         </database>
         <properties>
           <auto-commit value="false" />
