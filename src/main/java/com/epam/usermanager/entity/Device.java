@@ -7,8 +7,8 @@ public class Device {
     private Type type;
     private User owner;
 
-    public Device(String nameOfDevice, Type type, User user) {
-        this.id = count;
+    public Device(int id, String nameOfDevice, Type type, User user) {
+        this.id = id;
         this.nameOfDevice = nameOfDevice;
         this.type = type;
         if (user != null) {

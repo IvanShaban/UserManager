@@ -24,11 +24,7 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes>
-      <connection connection-id="bd624907-0699-49e4-ae23-275528864682">
-        <schema name="usermanager" object-types="table" />
-      </connection>
-    </loaded-nodes>
+    <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="bd624907-0699-49e4-ae23-275528864682">
@@ -41,6 +37,10 @@
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="bd624907-0699-49e4-ae23-275528864682" />
   </component>
+  <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="bd624907-0699-49e4-ae23-275528864682" dataset="usermanager.users" active-filter-id="" />
+    <filter-actions connection-id="bd624907-0699-49e4-ae23-275528864682" dataset="usermanager.devices" active-filter-id="" />
+  </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
   </component>
@@ -48,7 +48,6 @@
     <retain-sticky-names value="false" />
   </component>
   <component name="DBNavigator.Project.FileConnectionMappingManager">
-    <mapping file-url="file://$PROJECT_DIR$/src/main/resources/dbconnection/connection" connection-id="bd624907-0699-49e4-ae23-275528864682" session-id="MAIN" current-schema="" />
     <mapping file-url="file://$PROJECT_DIR$/src/main/resources/asdf" connection-id="bd624907-0699-49e4-ae23-275528864682" session-id="MAIN" current-schema="usermanager" />
   </component>
   <component name="DBNavigator.Project.MethodExecutionManager">

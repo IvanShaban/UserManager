@@ -8,12 +8,13 @@ import com.epam.usermanager.repository.UserRepository;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 
 public class UserService {
     private UserRepository userRepository = new UserRepository();
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-    public void startUserService() throws IOException, UserNotFoundException {
+    public void startUserService() throws IOException, UserNotFoundException, SQLException, ClassNotFoundException {
         System.out.println("Работа с пользователями.");
         System.out.println("Выберите дальнейшие действия:");
         System.out.println("1. Сохранить нового пользователя.");
@@ -50,7 +51,7 @@ public class UserService {
         startUserService();
     }
 
-    public void createUser() throws IOException {
+    public void createUser() throws IOException, SQLException, ClassNotFoundException {
         System.out.println("Сохранение нового пользователя.");
         System.out.println("Введите имя.");
         String name = reader.readLine();
@@ -84,7 +85,7 @@ public class UserService {
         System.out.println();
     }
 
-    public User findUser() throws IOException, UserNotFoundException {
+    public User findUser() throws IOException, UserNotFoundException, ClassNotFoundException, SQLException {
         System.out.println("Поиск пользователя по id или по имени.");
         System.out.println("Выберите вид поиска:");
         System.out.println("1 - поиск по id, 2 - поиск по имени.");
@@ -114,7 +115,7 @@ public class UserService {
         return user;
     }
 
-    public void deleteUser() throws IOException {
+    public void deleteUser() throws IOException, SQLException, ClassNotFoundException {
         System.out.println("Удаление пользователя.");
         System.out.println("Введите id.");
         int id = Integer.parseInt(reader.readLine());
@@ -123,7 +124,7 @@ public class UserService {
         System.out.println();
     }
 
-    public void updateUser() throws IOException {
+    public void updateUser() throws IOException, SQLException, ClassNotFoundException {
         System.out.println("Обновление пользователя.");
         System.out.println("Введите id.");
         int id = Integer.parseInt(reader.readLine());

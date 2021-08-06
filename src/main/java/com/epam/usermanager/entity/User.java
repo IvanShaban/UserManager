@@ -15,6 +15,14 @@ public class User {
         count++;
     }
 
+    public User(int id, String name, Sex sex, String favoritePorn) {
+        this.id = id;
+        this.name = name;
+        this.sex = sex;
+        this.favoritePorn = favoritePorn;
+        count++;
+    }
+
     public int getId() {
         return id;
     }

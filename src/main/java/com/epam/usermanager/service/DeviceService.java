@@ -8,6 +8,7 @@ import com.epam.usermanager.repository.DeviceRepository;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.List;
 
 public class DeviceService {
@@ -15,7 +16,7 @@ public class DeviceService {
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     private UserService userService = new UserService();
 
-    public void startDeviceService() throws IOException {
+    public void startDeviceService() throws IOException, SQLException, ClassNotFoundException {
         System.out.println("Работа с девайсами.");
         System.out.println("Выберите дальнейшие действия:");
         System.out.println("1. Сохранить новый девайс.");
@@ -57,7 +58,7 @@ public class DeviceService {
         startDeviceService();
     }
 
-    public void createDevice() throws IOException {
+    public void createDevice() throws IOException, SQLException, ClassNotFoundException {
         System.out.println("Сохранение нового девайса.");
         System.out.println("Введите название девайса.");
 
@@ -102,18 +103,20 @@ public class DeviceService {
         System.out.println(device);
     }
 
-    public void updateDevice() throws IOException {
+    public void updateDevice() throws IOException, SQLException, ClassNotFoundException {
         System.out.println("Обновление информации о девайсе.");
         System.out.println("Введите название девайса.");
         String nameOfDevice = reader.readLine();
-        Device device = deviceRepository.findByNameOfDevice(nameOfDevice);
-        System.out.println(device);
-
         if (nameOfDevice.equals("")) {
             System.out.println("Все хуйня Миша, давай по новой!");
             updateDevice();
         }
 
+        Device device = deviceRepository.findByNameOfDevice(nameOfDevice);
+        System.out.println(device);
+
+        System.out.println("Введите новое название девайса.");
+        String newNameOfDevice = reader.readLine();
         System.out.println("Выберите тип девайса.");
         System.out.println("1. Телефон.");
         System.out.println("2. Ноутбук.");
@@ -145,13 +148,13 @@ public class DeviceService {
             System.out.println("Все хуйня Миша, давай по новой!");
             updateDevice();
         }
-        device = deviceRepository.updateById(device.getId(), nameOfDevice, Type.valueOf(typeOfDevice), owner);
+        device = deviceRepository.updateById(device.getId(), newNameOfDevice, Type.valueOf(typeOfDevice), owner);
         System.out.println("Девайс обновлен");
         System.out.println(device);
         System.out.println();
     }
 
-    public void deleteDevice() throws IOException {
+    public void deleteDevice() throws IOException, SQLException, ClassNotFoundException {
         System.out.println("Удаление девайса.");
         System.out.println("Введите id девайса.");
         int id = Integer.parseInt(reader.readLine());
@@ -160,7 +163,7 @@ public class DeviceService {
         System.out.println();
     }
 
-    public void findDevices(User owner) throws IOException {
+    public void findDevices(User owner) throws IOException, SQLException, ClassNotFoundException {
         List<Device> listOfDevices;
         if (owner == null) {
             listOfDevices = deviceRepository.getUserDevices();
@@ -181,13 +184,13 @@ public class DeviceService {
         }
     }
 
-    public Device appointNewOwner(int actionNumber) throws IOException {
+    public Device appointNewOwner(int actionNumber) throws IOException, SQLException, ClassNotFoundException {
         if (actionNumber == 2) {
             return null;
         }
         System.out.println("Выберите id девайса.");
         int idOfDevice = Integer.parseInt(reader.readLine());
-        Device device = deviceRepository.getDeviceRepository().get(idOfDevice);
+        Device device = deviceRepository.findByIdOfDevice(idOfDevice);
         User owner = userService.findUser();
         String nameOfDevice = device.getNameOfDevice();
         Type typeOfDevice = device.getType();
