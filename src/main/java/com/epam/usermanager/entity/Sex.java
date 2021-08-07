@@ -1,4 +1,4 @@
-package entity;
+package com.epam.usermanager.entity;
 
 public enum Sex {
     MALE("мужской"),

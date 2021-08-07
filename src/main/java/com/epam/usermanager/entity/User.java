@@ -1,7 +1,7 @@
-package entity;
+package com.epam.usermanager.entity;
 
 public class User {
-    private int count;
+    private static int count;
     private int id;
     private String name;
     private Sex sex;
@@ -9,6 +9,14 @@ public class User {
 
     public User(String name, Sex sex, String favoritePorn) {
         this.id = count;
+        this.name = name;
+        this.sex = sex;
+        this.favoritePorn = favoritePorn;
+        count++;
+    }
+
+    public User(int id, String name, Sex sex, String favoritePorn) {
+        this.id = id;
         this.name = name;
         this.sex = sex;
         this.favoritePorn = favoritePorn;
@@ -25,10 +33,6 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Sex getSex() {
-        return sex;
     }
 
     public void setSex(Sex sex) {
